@@ -9,6 +9,18 @@
           "path": "json/both-command_l-and-command_r-to-escape.json"
         },
         {
+          "path": "json/skcc_arrows.json"
+        },
+        {
+          "path": "json/skcc_exchange_keys.json"
+        },
+        {
+          "path": "json/skcc_hot_keys.json"
+        },
+        {
+          "path": "json/skcc_numeric_keypad.json"
+        },
+        {
           "path": "json/caps_lock.json"
         },
         {
