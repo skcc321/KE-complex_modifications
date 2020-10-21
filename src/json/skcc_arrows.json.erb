@@ -1,0 +1,46 @@
+{
+    "title": "Arrows",
+    <%
+        # standard key mapping where space is 0
+        remap_source_keys = [
+            "i",
+            "j","k","l"
+        ]
+        remap_dest_keys = [
+            "up_arrow",
+            "left_arrow","down_arrow","right_arrow"
+        ]
+        manipulators = each_key(
+            source_keys_list: remap_source_keys,
+            dest_keys_list: remap_dest_keys,
+            conditions: [{ "type"=>"variable_if", "name"=>"arrow_mode", "value"=>1 }]
+        )
+        manipulators_str = ""
+        manipulators.each do |m|
+            manipulators_str += "#{JSON.generate(m)}, "
+        end
+        manipulators_str.chomp!(", ")
+    %>
+    "rules": [
+        {
+            "description": "Arrows Trigger [: as trigger key]",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": <%= from("z", [], []) %>,
+                    "to": [
+                        { "set_variable": { "name": "arrow_mode", "value": 1 } }
+                    ],
+                    "to_if_alone": <%= to([["z"]]) %>,
+                    "to_after_key_up": [
+                        { "set_variable": { "name": "arrow_mode", "value": 0 } }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "Arrow Mode",
+            "manipulators": [<%= manipulators_str %>]
+        }
+    ]
+}
